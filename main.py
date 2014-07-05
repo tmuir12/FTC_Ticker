@@ -3,7 +3,6 @@ import datetime
 import calendar
 import time
 import lcddriver
-# from time import *
 
 lcd = lcddriver.lcd()
 
