@@ -26,8 +26,8 @@ while True:
 			sundayreset=1
 
 	if check is 0:
-		if sundayrest == 1:
-			sundayrest = 0
+		if sundayreset == 1:
+			sundayreset = 0
 	
 	#gets current value of ftc
 	currentprice = ftcapi.toFTC(1)
