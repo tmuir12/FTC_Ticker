@@ -31,20 +31,23 @@ while True:
 	
 	#gets current value of ftc
 	currentprice = ftcapi.toFTC(1)
-	if currentprice > highprice:
-		highprice = currentprice
-	if currentprice < lowprice:
-		lowprice = currentprice
-
-	#display price and date and time
-	#call lcd module to display on lcd
-	lcd.lcd_display_string("FTC Price in AUD", 1)
-	#need to convert float value to string to print and format it to always 4 decimal places
-	lcd.lcd_display_string("Low "+ str("{:.4f}".format(lowprice)) + " HI " + str("{:.4f}".format(highprice)), 2)
-	lcd.lcd_display_string("Current Price "+ str("{:.4f}".format(currentprice)), 3)
-	lcd.lcd_display_string(time.strftime("%d/%m/%Y")+" "+ time.strftime("%H:%M:%S"), 4)
 	
-	#print lines for test purposes, comment out when in use
-	print "current price ",currentprice," lowprice ", lowprice, "highprice ", highprice
-	print "today", check
+	#only updated all of display if API responded
+	if currentprice > 0:	
+		if currentprice > highprice:
+			highprice = currentprice
+		if currentprice < lowprice:
+			lowprice = currentprice
+
+		#display price and date and time
+		#call lcd module to display on lcd
+		lcd.lcd_display_string("FTC Price in AUD", 1)
+		#need to convert float value to string to print and format it to always 4 decimal places
+		lcd.lcd_display_string("Low "+ str("{:.4f}".format(lowprice)) + " HI " + str("{:.4f}".format(highprice)), 2)
+		lcd.lcd_display_string("Current Price "+ str("{:.4f}".format(currentprice)), 3)
+		lcd.lcd_display_string(time.strftime("%d/%m/%Y")+" "+ time.strftime("%H:%M:%S"), 4)
+	else:
+		lcd.lcd_display_string("Current Price OffLne", 3)
+		lcd.lcd_display_string(time.strftime("%d/%m/%Y")+" "+ time.strftime("%H:%M:%S"), 4)
+	
 	time.sleep(30) #waits 30 seconds before repeating
